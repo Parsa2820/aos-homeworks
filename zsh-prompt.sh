@@ -2,4 +2,4 @@
 # run with `source zsh-prompt.sh`
 
 precmd_functions=""
-PROMPT="parsa_mohammadian_98102284 $(date) $PROMPT"
+PROMPT="%{$bg[white]%}%{$fg[black]%}parsa_mohammadian_98102284%{$reset_color%}$PROMPT"
