@@ -224,10 +224,59 @@ thread_d: writing to shared pointer
        0.008697000 seconds sys
 \end{lstlisting}
 \end{latin}
+\subsubsection{}
+اعداد زیر از خروجی که در بالا آمده است به دست آمده‌اند. 
+\begin{latin}
+page-faults: 65, 64, 62 \\
+dTLB-load-misses: 332, 304, 332 \\
+dTLB-loads: 37425, 36375, 36252 \\
+dTLB-stores: 14689, 14057, 13943
+\end{latin}
+با توجه به این اعداد،‌ 
+\lr{page fault}ها
+کم شده‌اند و عملیات‌های مربوط به 
+\lr{TLB} 
+نیز کم شده است. ولی با این حال 
+\lr{miss}
+ها تفاوت معناداری نکرده‌اند. 
 
 \subsubsection{}
+در این سه حالت، در حالت الف امکان ندارد 
+\lr{page fault}
+رخ بدهد. در حالت ب امکان رخ دادن 
+\lr{page fault}
+وجود دارد و این بستگی به این دارد که ریسمان 
+\lr{D}
+زودتر اجرا شود یا ریسمان 
+\lr{B}.
+در حالت ج هم همانند حالت ب این امکان وجود دارد و عملا 
+\lr{race condition}
+بین سه ریسمان 
+\lr{B}،
+\lr{C} و 
+\lr{D}
+به وجود می‌آید.
+
 \subsubsection{}
-\subsubsection{}
+برای شماره اول، خروی 
+\lr{perf}
+در همان قسمت و در خروجی اجرای اسکریپت آمده است. 
+
+برای شماره دوم اعداد را از خروجی همانند قبل درمیاوریم.
+\begin{latin}
+page-faults: 63, 64, 67 \\
+dTLB-load-misses: 354, 331, 324 \\
+dTLB-loads: 37429, 37251, 36151 \\
+dTLB-stores: 14711, 14555, 13968
+\end{latin}
+با توجه به این اعداد،‌ تعداد 
+\lr{page fault}ها
+بیشتر شده‌اند و آمار مربوط به 
+\lr{TLB}
+کاهش پیدا کرده‌اند. 
+
+برای شماره سوم کد کاملا مانند حالت قبل که صفحات ۴ کیلوبایتی است 
+عمل می‌کند. 
 \subsection{}
 \subsubsection{}
 کد مربوط به این بخش در فایل 
@@ -371,9 +420,35 @@ thread_c: writing to shared memory
        0.009095000 seconds sys   
 \end{lstlisting}
 \end{latin}
+\subsubsection{}
+از خروجی قسمت بالا اعداد زیر را بدست می‌آوریم.
+\begin{latin}
+page-faults: 65, 64, 63 \\
+dTLB-load-misses: 317, 320, 284 \\
+dTLB-loads: 36441, 36288, 35948 \\
+dTLB-stores: 14159, 14043, 13807
+\end{latin}
+با توجه به این اعداد تعداد 
+\lr{page fault}ها
+کاهش پیدا کرده است ولی روند مشخصی در عملیات‌های مربوط به 
+\lr{TLB}
+مشاهده نمی‌شود. 
 
 \subsubsection{}
-\subsubsection{}
+خروجی خواسته شده در همان خروجی اسکریپت قسمت اول آورده شده است. اعداد زیر را برای 
+تحلیل از خروجی بالا استراج می‌کنیم. 
+\begin{latin}
+page-faults: 64, 64, 62 \\
+dTLB-load-misses: 279, 308, 292 \\
+dTLB-loads: 35031, 36506, 35269 \\
+dTLB-stores: 13388, 14122, 13416
+\end{latin}
+الگو این اعداد همانند اعدادی هستند که در اجرای قبلی دیده شدند. پس می‌توانیم نتیجه بگیریم 
+\lr{munmap} 
+کردن فرقی با 
+\lr{mmap}
+کردن جای جدید در حافظه ندارد. 
+
 \subsection{}
 \subsubsection{}
 کد مربوط به این بخش در فایل 
