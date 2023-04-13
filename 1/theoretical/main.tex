@@ -16,6 +16,36 @@
 
 \section*{تئوری}
 \section{}
+از آنجایی که در مجموع 
+$$
+4 \times 20 \times 2 = 160
+$$
+ریسمان می‌تواند در سیستم به صورت همزمان اجرا شود، این ۲۵۶ ریسمان باید در 
+دو نوبت اجرا شوند. در هر نوبت آدرس‌هایی که 
+\lr{allocate}
+می‌شوند در 
+\lr{TLB}
+ذخیره می‌شوند و سپس با 
+\lr{TLB Shootdown IPI}
+پاک می‌شوند. تعداد این 
+\lr{TLB Shootdown IPI}ها 
+باید برابر تعداد 
+\lr{deallocate}ها 
+باشد یعنی برابر با عدد زیر.
+$$
+10^6 \times 256 = 2^20 \times 2^8 = 2^{28}
+$$
+برای کاهش این عدد می‌توانیم قبل از 
+\lr{deallocate}
+کردن،‌ یک دور 
+\lr{instruction}
+مربوط به 
+\lr{TLB Shootdown}
+را اجرا می‌کنیم و سپس حافظه‌های گرفته شده را 
+\lr{deallocate}
+می‌کنیم. اینگونه فاکتور تعداد 
+\lr{deallocate}ها 
+از ضرب بالا حذف می‌شوند.
 
 \section*{عملی}
 \setcounter{section}{0}
@@ -199,6 +229,151 @@ thread_d: writing to shared pointer
 \subsubsection{}
 \subsubsection{}
 \subsection{}
+\subsubsection{}
+کد مربوط به این بخش در فایل 
+\lr{1.2.c}
+وجود دارد. همچنین اسکریپت مربوط به اجرای این کد در فایل 
+\lr{1.2.sh}
+موجود می‌باشد. در عکس زیر اجرا شدن این اسکریپت را مشاهده میکنیم. خروجی مربوط 
+به آن در ادامه به صورت کامل آمده است. 
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\linewidth]{1.2.png}
+   \caption{اجرا کردن اسکریپت}
+\end{figure}
+
+\begin{latin}
+\begin{lstlisting}
+Running 1.2
+Running with normal thread b
+Compiling with param NOALT
+Running alef
+thread_d: reading shared memory
+thread_b: reading shared memory
+thread_b: exchanged first
+thread_b: read shared memory
+thread_d: exchanged first
+thread_d: read shared memory
+
+ Performance counter stats for './1.2 alef':
+
+                65      page-faults:u                                                         
+               317      dTLB-load-misses:u               #    0.87% of all dTLB cache accesses
+            36,441      dTLB-loads:u                                                          
+            14,159      dTLB-stores:u                                                         
+
+       0.001600305 seconds time elapsed
+
+       0.001888000 seconds user
+       0.000000000 seconds sys
+
+
+-----------------
+Running be
+thread_b: writing to shared memory
+thread_b: wrote to shared memory
+thread_b: reading shared memory
+thread_b: exchanged second
+thread_b: read shared memory
+
+ Performance counter stats for './1.2 be':
+
+                64      page-faults:u                                                         
+               320      dTLB-load-misses:u               #    0.88% of all dTLB cache accesses
+            36,288      dTLB-loads:u                                                          
+            14,043      dTLB-stores:u                                                         
+
+       0.001256085 seconds time elapsed
+
+       0.001495000 seconds user
+       0.000000000 seconds sys
+
+
+-----------------
+Running jim
+thread_b: writing to shared memory
+thread_b: wrote to shared memory
+thread_c: writing to shared memory
+thread_c: wrote to shared memory
+
+ Performance counter stats for './1.2 jim':
+
+                63      page-faults:u                                                         
+               284      dTLB-load-misses:u               #    0.79% of all dTLB cache accesses
+            35,948      dTLB-loads:u                                                          
+            13,807      dTLB-stores:u                                                         
+
+       0.000940042 seconds time elapsed
+
+       0.001195000 seconds user
+       0.000000000 seconds sys
+
+
+-----------------
+Running with alternative thread b implementation
+Compiling with param ALT
+Running alef
+thread_d: reading shared memory
+./1.2: Segmentation fault
+
+ Performance counter stats for './1.2 alef':
+
+                64      page-faults:u                                                         
+               279      dTLB-load-misses:u               #    0.80% of all dTLB cache accesses
+            35,031      dTLB-loads:u                                                          
+            13,388      dTLB-stores:u                                                         
+
+       0.132951991 seconds time elapsed
+
+       0.000000000 seconds user
+       0.009916000 seconds sys
+
+
+-----------------
+Running be
+thread_b: writing to shared memory
+thread_b: wrote to shared memory
+thread_b: reading shared memory
+thread_b: thread b was here
+thread_b: read shared memory
+
+ Performance counter stats for './1.2 be':
+
+                64      page-faults:u                                                         
+               308      dTLB-load-misses:u               #    0.84% of all dTLB cache accesses
+            36,506      dTLB-loads:u                                                          
+            14,122      dTLB-stores:u                                                         
+
+       0.001034783 seconds time elapsed
+
+       0.001186000 seconds user
+       0.000000000 seconds sys
+
+
+-----------------
+Running jim
+thread_b: writing to shared memory
+thread_b: wrote to shared memory
+thread_c: writing to shared memory
+./1.2: Segmentation fault
+
+ Performance counter stats for './1.2 jim':
+
+                62      page-faults:u                                                         
+               292      dTLB-load-misses:u               #    0.83% of all dTLB cache accesses
+            35,269      dTLB-loads:u                                                          
+            13,416      dTLB-stores:u                                                         
+
+       0.112482720 seconds time elapsed
+
+       0.000000000 seconds user
+       0.009095000 seconds sys   
+\end{lstlisting}
+\end{latin}
+
+\subsubsection{}
+\subsubsection{}
 \subsection{}
 \subsubsection{}
 کد مربوط به این بخش در فایل 
