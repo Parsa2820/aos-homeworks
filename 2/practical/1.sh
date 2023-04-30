@@ -1,6 +1,6 @@
 #!/bin/bash
 
-gcc -o 1 1.c
+gcc -o 1 1.c -lphtread
 
 for i in {1..7}
 do
