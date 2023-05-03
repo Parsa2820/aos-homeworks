@@ -1,0 +1,327 @@
+\documentclass{article}
+
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{float}
+
+\usepackage{xepersian}
+\settextfont{XB Zar}
+
+\title{تمرین سری دوم درس سیستم‌های عامل پیشرفته}
+\author{پارسا محمدیان -- 98102284}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{}
+کد مربوط به این بخش در فایل 
+\lr{1.c}
+موجود است. اسکریپت اجرای آن نیز در فایل 
+\lr{1.sh}
+موجود است. 
+
+اسکریپت همانطور که در تصاویر زیر نشان داده شده،‌ اجرا می‌شود. 
+مقدار 
+\lr{sleep}ای 
+که قبل از دستور قرار داده شده است، برای این است که اسکریپت به صورت همزمان در هر دو ماشین 
+اجرا شوند. (دقت شود که ساعت سیستم با ساعت دو ماشین هماهنگ نیست ولی ساعت دو ماشین 
+با هم هماهنگ است)
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\linewidth]{1-command.png}
+\end{figure}
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\linewidth]{1-result.png}
+\end{figure}
+
+\subsection{}
+آمار در ماشین مجازی اول به صورت زیر است. 
+\begin{latin}
+\begin{lstlisting}
+Running 1 with 1 threads
+
+ Performance counter stats for './1 1':
+
+                66      page-faults                                                 
+             1,351      cache-misses                                                
+           208,631      dTLB-load-misses          #    2.30% of all dTLB cache hits 
+         9,083,608      dTLB-loads                                                  
+         9,959,871      dTLB-stores                                                 
+
+       0.103882603 seconds time elapsed
+
+       0.068069000 seconds user
+       0.036036000 seconds sys
+
+
+-----------------
+Running 1 with 2 threads
+
+ Performance counter stats for './1 2':
+
+                68      page-faults                                                 
+             1,088      cache-misses                                                
+           412,309      dTLB-load-misses          #    2.30% of all dTLB cache hits 
+        17,938,345      dTLB-loads                                                  
+        19,776,989      dTLB-stores                                                 
+
+       0.100759692 seconds time elapsed
+
+       0.114487000 seconds user
+       0.082904000 seconds sys
+\end{lstlisting}
+\end{latin}
+
+آمار در ماشین مجازی دوم به صورت زیر است.
+\begin{latin}
+\begin{lstlisting}
+Running 1 with 1 threads
+
+ Performance counter stats for './1 1':
+
+                63      page-faults                                                 
+             1,570      cache-misses                                                
+           208,701      dTLB-load-misses          #    2.29% of all dTLB cache hits 
+         9,096,343      dTLB-loads                                                  
+         9,968,360      dTLB-stores                                                 
+
+       0.103917866 seconds time elapsed
+
+       0.060072000 seconds user
+       0.044052000 seconds sys
+
+
+-----------------
+Running 1 with 2 threads
+
+ Performance counter stats for './1 2':
+
+                64      page-faults                                                 
+             1,078      cache-misses                                                
+           412,514      dTLB-load-misses          #    2.30% of all dTLB cache hits 
+        17,932,761      dTLB-loads                                                  
+        19,780,259      dTLB-stores                                                 
+
+       0.106430090 seconds time elapsed
+
+       0.121090000 seconds user
+       0.084763000 seconds sys
+\end{lstlisting}
+\end{latin}
+
+\subsection{}
+TODO
+
+\section{}
+\subsection{}
+ابتدا این برنامه را بر روی سیستم خودم اجرا کردم.
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\linewidth]{2-baremetal.png}
+\end{figure}
+نتایج به صورت زیر هستند.
+\begin{latin}
+\begin{lstlisting}
+Running 2 with SYNC
+
+ Performance counter stats for './2 SYNC':
+
+                67      page-faults                                                           
+            66,468      cache-misses                                                          
+             1,726      dTLB-load-misses                 #    0.52% of all dTLB cache accesses
+           329,574      dTLB-loads                                                            
+           171,898      dTLB-stores                                                           
+
+       0.003173850 seconds time elapsed
+
+       0.001373000 seconds user
+       0.000000000 seconds sys
+
+
+-----------------
+Running 2 with ASYNC
+
+ Performance counter stats for './2 ASYNC':
+
+                62      page-faults                                                           
+            24,961      cache-misses                                                          
+             1,269      dTLB-load-misses                 #    0.41% of all dTLB cache accesses
+           306,500      dTLB-loads                                                            
+           156,641      dTLB-stores                                                           
+
+       0.000946218 seconds time elapsed
+
+       0.000997000 seconds user
+       0.000000000 seconds sys
+\end{lstlisting}
+\end{latin}
+
+\subsection{}
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\linewidth]{2-2-command.png}
+\end{figure}
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\linewidth]{2-2-result.png}
+\end{figure}
+
+آمار در ماشین مجازی اول به صورت زیر است.
+\begin{latin}
+\begin{lstlisting}
+Running 2 with SYNC
+
+ Performance counter stats for './2 SYNC':
+
+                65      page-faults                                                 
+             1,532      cache-misses                                                
+             8,824      dTLB-load-misses          #    2.62% of all dTLB cache hits 
+           336,631      dTLB-loads                                                  
+           227,949      dTLB-stores                                                 
+
+       0.005053908 seconds time elapsed
+
+       0.003996000 seconds user
+       0.000000000 seconds sys
+
+
+-----------------
+Running 2 with ASYNC
+
+ Performance counter stats for './2 ASYNC':
+
+                63      page-faults                                                 
+               744      cache-misses                                                
+             6,865      dTLB-load-misses          #    2.43% of all dTLB cache hits 
+           282,344      dTLB-loads                                                  
+           193,235      dTLB-stores                                                 
+
+       0.002844051 seconds time elapsed
+
+       0.000000000 seconds user
+       0.003352000 seconds sys
+\end{lstlisting}
+\end{latin}
+
+آمار در ماشین مجازی دوم به صورت زیر است.
+\begin{latin}
+\begin{lstlisting}
+   Running 2 with SYNC
+
+   Performance counter stats for './2 SYNC':
+  
+                  69      page-faults                                                 
+               1,603      cache-misses                                                
+               7,845      dTLB-load-misses          #    2.31% of all dTLB cache hits 
+             339,245      dTLB-loads                                                  
+             225,842      dTLB-stores                                                 
+  
+         0.004817587 seconds time elapsed
+  
+         0.002889000 seconds user
+         0.000000000 seconds sys
+  
+  
+  -----------------
+  Running 2 with ASYNC
+  
+   Performance counter stats for './2 ASYNC':
+  
+                  62      page-faults                                                 
+               1,212      cache-misses                                                
+               5,888      dTLB-load-misses          #    2.07% of all dTLB cache hits 
+             285,011      dTLB-loads                                                  
+             194,891      dTLB-stores                                                 
+  
+         0.001626137 seconds time elapsed
+  
+         0.000000000 seconds user
+         0.001870000 seconds sys
+\end{lstlisting}
+\end{latin}
+
+\subsection{}
+TODO
+
+\subsection{}
+همانطور که در خروجی‌های قسمت الف و ب مشاهده می‌کنیم،‌ برنامه یک بار 
+برای 
+\lr{MS\_ASYNC}
+نیز اجرا شده. 
+
+TODO
+
+\section{}
+\subsection{}
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\linewidth]{3-1.png}
+\end{figure}
+
+خروجی به صورت زیر است. 
+\begin{latin}
+\begin{lstlisting}
+Running 3.sh
+Stress with --cpu 10 for 3 seconds
+stress: info: [15825] dispatching hogs: 10 cpu, 0 io, 0 vm, 0 hdd
+stress: info: [15825] successful run completed in 3s
+
+ Performance counter stats for 'stress --cpu 10 --timeout 3':
+
+               249      page-faults                                                           
+           424,524      cache-misses                                                          
+            40,139      dTLB-load-misses                 #    0.00% of all dTLB cache accesses
+    14,601,481,747      dTLB-loads                                                            
+     8,453,054,195      dTLB-stores                                                           
+
+       3.002095545 seconds time elapsed
+
+      23.729431000 seconds user
+       0.000000000 seconds sys
+
+
+Stress with --vm 4 and --vm-bytes 512M for 3 seconds
+stress: info: [15837] dispatching hogs: 0 cpu, 0 io, 4 vm, 0 hdd
+stress: info: [15837] successful run completed in 3s
+
+ Performance counter stats for 'stress --vm 4 --vm-bytes 512M --timeout 3':
+
+            67,552      page-faults                                                           
+     1,168,546,994      cache-misses                                                          
+           189,917      dTLB-load-misses                 #    0.06% of all dTLB cache accesses
+       333,679,196      dTLB-loads                                                            
+       192,506,882      dTLB-stores                                                           
+
+       3.003246134 seconds time elapsed
+
+       0.348566000 seconds user
+      11.572867000 seconds sys
+
+
+Stress with --io 5 for 3 seconds
+stress: info: [15847] dispatching hogs: 0 cpu, 5 io, 0 vm, 0 hdd
+stress: info: [15847] successful run completed in 3s
+
+ Performance counter stats for 'stress --io 5 --timeout 3':
+
+               152      page-faults                                                           
+           456,272      cache-misses                                                          
+           295,050      dTLB-load-misses                 #    0.02% of all dTLB cache accesses
+     1,678,024,471      dTLB-loads                                                            
+     1,184,417,634      dTLB-stores                                                           
+
+       3.001306920 seconds time elapsed
+
+       0.056395000 seconds user
+      12.314625000 seconds sys
+\end{lstlisting}
+\end{latin}
+
+\subsection{}
+
+\subsection{}
+
+\end{document}

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TIMEOUT=3
+TIMEOUT=30
 
 echo "Running 3.sh"
 echo "Stress with --cpu 10 for $TIMEOUT seconds"
