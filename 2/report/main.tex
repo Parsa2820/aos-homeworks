@@ -26,8 +26,13 @@
 مقدار 
 \lr{sleep}ای 
 که قبل از دستور قرار داده شده است، برای این است که اسکریپت به صورت همزمان در هر دو ماشین 
-اجرا شوند. (دقت شود که ساعت سیستم با ساعت دو ماشین هماهنگ نیست ولی ساعت دو ماشین 
-با هم هماهنگ است)
+اجرا شوند (دقت شود که ساعت سیستم با ساعت دو ماشین هماهنگ نیست ولی ساعت دو ماشین 
+با هم هماهنگ است).
+در ادامه این دستور 
+\lr{sleep}
+در فایل 
+\lr{wait-untill.sh}
+ذخیره و فراخوانی شده است.
 
 \begin{figure}[H]
    \centering
@@ -114,7 +119,51 @@ Running 1 with 2 threads
 \end{latin}
 
 \subsection{}
-TODO
+نتیجه اجرای این برنامه در تمرین اول نیز در ادامه قابل مشاهده است. 
+\begin{latin}
+\begin{lstlisting}
+Running 1.3 with 1 threads
+
+ Performance counter stats for './1.3':
+
+                53      page-faults:u                                                         
+             6,313      cache-misses:u                                                        
+               167      dTLB-load-misses:u               #    0.52% of all dTLB cache accesses
+            31,950      dTLB-loads:u                                                          
+            11,341      dTLB-stores:u                                                         
+
+       0.000851952 seconds time elapsed
+
+       0.000867000 seconds user
+       0.000000000 seconds sys
+
+
+-----------------
+Running 1.3 with 2 threads
+
+ Performance counter stats for './1.3':
+
+                51      page-faults:u                                                         
+             6,226      cache-misses:u                                                        
+               159      dTLB-load-misses:u               #    0.50% of all dTLB cache accesses
+            31,950      dTLB-loads:u                                                          
+            11,341      dTLB-stores:u                                                         
+
+       0.000786024 seconds time elapsed
+
+       0.000811000 seconds user
+       0.000000000 seconds sys
+\end{lstlisting}
+\end{latin}
+همانطور که مشاهده می‌کنیم،‌ این آمار در ماشین ۱ و ۲ تفاوت چندانی ندارند.
+اما نسبت به نتایج آزمایش تمرین اول تغییرات قابل توجهی مشاهده می‌کنیم. 
+در آزمایش جدید تعداد 
+\lr{page-fault}ها 
+تغییر چندانی نکرده است. تعداد 
+\lr{cache-miss}ها
+مقداری کاهش یافته است. تغییر اساسی در آمار مربوط به 
+\lr{TLB}
+است که به صورت محسوسی افزایش یافته‌اند.
 
 \section{}
 کد این برنامه در فایل 
@@ -249,7 +298,9 @@ Running 2 with ASYNC
 \end{latin}
 
 \subsection{}
-TODO
+تغییر بزرگی در این آمار‌ها وجود ندارد. صرفا 
+\lr{cache miss}ها 
+در اجرای ماشین مجازی کمتر هستند.
 
 \subsection{}
 همانطور که در خروجی‌های قسمت الف و ب مشاهده می‌کنیم،‌ برنامه یک بار 
@@ -257,7 +308,9 @@ TODO
 \lr{MS\_ASYNC}
 نیز اجرا شده. 
 
-TODO
+همانطور که مشاهده می‌شود، اکثر آمارها در اجرای 
+\lr{MS\_ASYNC}
+کاهش پیدا کرده‌اند. 
 
 \section{}
 این قسمت کدی به زبان 
@@ -459,6 +512,28 @@ stress: info: [102104] successful run completed in 30s
 \end{latin}
 
 \subsection{}
-TODO
+برای هر کدام از تست‌ جداگانه بررسی می‌کنیم. از آنجایی که آمار 
+دو ماشین مجازی نسبت به هم تفاوت زیادی ندارد، دو ماشین مجازی 
+را با حالت 
+\lr{baremetal}
+مقایسه می‌کنیم. 
+
+\begin{enumerate}
+  \item در این تست 
+  \lr{cache misses}
+  در حالت 
+  \lr{baremetal}
+  بیشتر از حالت ماشین مجازی است. اما در مقابل 
+  \lr{TLB load misses}
+  کمتر است. و بقیه آمارها نیز تفاوت زیادی ندارند.
+  \item در این تست همه آمارها به غیر از 
+  \lr{cache misses}
+  در حالت ماشین مجازی بیشتر شده‌اند.
+  \item در تست آخر که مربوط به 
+  \lr{IO}
+  است، آمارها در حالت 
+  \lr{baremetal}
+  بیشتر شده‌اند.
+\end{enumerate}
 
 \end{document}
