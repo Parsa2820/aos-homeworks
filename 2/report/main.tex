@@ -266,6 +266,7 @@ TODO
 \lr{3.sh}
 می‌باشد. 
 \subsection{}
+ابتدا اسکریپت را روی سیستم خودم اجرا کردم.
 \begin{figure}[H]
    \centering
    \includegraphics[width=\linewidth]{3-1.png}
@@ -275,181 +276,185 @@ TODO
 \begin{latin}
 \begin{lstlisting}
 Running 3.sh
-Stress with --cpu 10 for 3 seconds
-stress: info: [15825] dispatching hogs: 10 cpu, 0 io, 0 vm, 0 hdd
-stress: info: [15825] successful run completed in 3s
+Stress with --cpu 10 for 30 seconds
+stress: info: [18111] dispatching hogs: 10 cpu, 0 io, 0 vm, 0 hdd
+7stress: info: [18111] successful run completed in 30s
 
- Performance counter stats for 'stress --cpu 10 --timeout 3':
+ Performance counter stats for 'stress --cpu 10 --timeout 30':
 
-               249      page-faults                                                           
-           424,524      cache-misses                                                          
-            40,139      dTLB-load-misses                 #    0.00% of all dTLB cache accesses
-    14,601,481,747      dTLB-loads                                                            
-     8,453,054,195      dTLB-stores                                                           
+               254      page-faults                                                           
+         8,402,004      cache-misses                                                          
+           516,139      dTLB-load-misses                 #    0.00% of all dTLB cache accesses
+   141,800,586,533      dTLB-loads                                                            
+    82,091,243,296      dTLB-stores                                                           
 
-       3.002095545 seconds time elapsed
+      30.002024177 seconds time elapsed
 
-      23.729431000 seconds user
-       0.000000000 seconds sys
-
-
-Stress with --vm 4 and --vm-bytes 512M for 3 seconds
-stress: info: [15837] dispatching hogs: 0 cpu, 0 io, 4 vm, 0 hdd
-stress: info: [15837] successful run completed in 3s
-
- Performance counter stats for 'stress --vm 4 --vm-bytes 512M --timeout 3':
-
-            67,552      page-faults                                                           
-     1,168,546,994      cache-misses                                                          
-           189,917      dTLB-load-misses                 #    0.06% of all dTLB cache accesses
-       333,679,196      dTLB-loads                                                            
-       192,506,882      dTLB-stores                                                           
-
-       3.003246134 seconds time elapsed
-
-       0.348566000 seconds user
-      11.572867000 seconds sys
+     233.838281000 seconds user
+       0.195070000 seconds sys
 
 
-Stress with --io 5 for 3 seconds
-stress: info: [15847] dispatching hogs: 0 cpu, 5 io, 0 vm, 0 hdd
-stress: info: [15847] successful run completed in 3s
+Stress with --vm 4 and --vm-bytes 512M for 30 seconds
+stress: info: [18241] dispatching hogs: 0 cpu, 0 io, 4 vm, 0 hdd
+stress: info: [18241] successful run completed in 30s
 
- Performance counter stats for 'stress --io 5 --timeout 3':
+ Performance counter stats for 'stress --vm 4 --vm-bytes 512M --timeout 30':
 
-               152      page-faults                                                           
-           456,272      cache-misses                                                          
-           295,050      dTLB-load-misses                 #    0.02% of all dTLB cache accesses
-     1,678,024,471      dTLB-loads                                                            
-     1,184,417,634      dTLB-stores                                                           
+           601,603      page-faults                                                           
+    10,564,193,883      cache-misses                                                          
+         2,114,172      dTLB-load-misses                 #    0.07% of all dTLB cache accesses
+     2,988,347,700      dTLB-loads                                                            
+     1,723,228,183      dTLB-stores                                                           
 
-       3.001306920 seconds time elapsed
+      30.004263068 seconds time elapsed
 
-       0.056395000 seconds user
-      12.314625000 seconds sys
+       3.449375000 seconds user
+     115.738466000 seconds sys
+
+
+Stress with --io 5 for 30 seconds
+stress: info: [18279] dispatching hogs: 0 cpu, 5 io, 0 vm, 0 hdd
+stress: info: [18279] successful run completed in 30s
+
+ Performance counter stats for 'stress --io 5 --timeout 30':
+
+               141      page-faults                                                           
+        35,274,133      cache-misses                                                          
+         3,887,164      dTLB-load-misses                 #    0.03% of all dTLB cache accesses
+    14,634,290,981      dTLB-loads                                                            
+    10,328,414,193      dTLB-stores                                                           
+
+      30.001919662 seconds time elapsed
+
+       0.574676000 seconds user
+     125.129620000 seconds sys
 \end{lstlisting}
 \end{latin}
 
 \subsection{}
 \begin{figure}[H]
    \centering
-   \includegraphics[width=\linewidth]{3-2.png}
+   \includegraphics[width=\linewidth]{3-2-command.png}
+\end{figure}
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\linewidth]{3-2-result.png}
 \end{figure}
 
 آمار در ماشین مجازی اول به صورت زیر است.
 \begin{latin}
 \begin{lstlisting}
 Running 3.sh
-Stress with --cpu 10 for 3 seconds
-stress: info: [75674] dispatching hogs: 10 cpu, 0 io, 0 vm, 0 hdd
-stress: info: [75674] successful run completed in 3s
+Stress with --cpu 10 for 30 seconds
+stress: info: [98481] dispatching hogs: 10 cpu, 0 io, 0 vm, 0 hdd
+stress: info: [98481] successful run completed in 30s
 
- Performance counter stats for 'stress --cpu 10 --timeout 3':
+ Performance counter stats for 'stress --cpu 10 --timeout 30':
 
-               190      page-faults                                                 
-            60,794      cache-misses                                                
-           469,498      dTLB-load-misses          #    0.00% of all dTLB cache hits 
-    19,002,964,229      dTLB-loads                                                  
-     9,004,323,383      dTLB-stores                                                 
+               199      page-faults                                                 
+           175,131      cache-misses                                                
+         4,619,728      dTLB-load-misses          #    0.00% of all dTLB cache hits 
+   192,881,922,162      dTLB-loads                                                  
+    91,391,285,723      dTLB-stores                                                 
 
-       3.004873353 seconds time elapsed
+      30.004808853 seconds time elapsed
 
-       8.971201000 seconds user
-       0.009060000 seconds sys
-
-
-Stress with --vm 4 and --vm-bytes 512M for 3 seconds
-stress: info: [75690] dispatching hogs: 0 cpu, 0 io, 4 vm, 0 hdd
-stress: info: [75690] successful run completed in 3s
-
- Performance counter stats for 'stress --vm 4 --vm-bytes 512M --timeout 3':
-
-         2,131,103      page-faults                                                 
-       104,971,012      cache-misses                                                
-        15,465,043      dTLB-load-misses          #    0.70% of all dTLB cache hits 
-     2,198,681,950      dTLB-loads                                                  
-     2,548,812,005      dTLB-stores                                                 
-
-       3.059735731 seconds time elapsed
-
-       1.384110000 seconds user
-       7.670667000 seconds sys
+      89.903521000 seconds user
+       0.025032000 seconds sys
 
 
-Stress with --io 5 for 3 seconds
-stress: info: [75698] dispatching hogs: 0 cpu, 5 io, 0 vm, 0 hdd
-stress: info: [75698] successful run completed in 3s
+Stress with --vm 4 and --vm-bytes 512M for 30 seconds
+stress: info: [98507] dispatching hogs: 0 cpu, 0 io, 4 vm, 0 hdd
+stress: info: [98507] successful run completed in 30s
 
- Performance counter stats for 'stress --io 5 --timeout 3':
+ Performance counter stats for 'stress --vm 4 --vm-bytes 512M --timeout 30':
 
-               120      page-faults                                                 
-           115,851      cache-misses                                                
-           567,052      dTLB-load-misses          #    0.08% of all dTLB cache hits 
-       741,293,169      dTLB-loads                                                  
-       491,725,206      dTLB-stores                                                 
+        20,480,258      page-faults                                                 
+     1,057,533,804      cache-misses                                                
+       157,022,494      dTLB-load-misses          #    0.77% of all dTLB cache hits 
+    20,364,287,538      dTLB-loads                                                  
+    23,892,497,012      dTLB-stores                                                 
 
-       3.003872105 seconds time elapsed
+      30.044557010 seconds time elapsed
 
-       0.035872000 seconds user
-       8.845788000 seconds sys
+      13.249759000 seconds user
+      76.374508000 seconds sys
+
+
+Stress with --io 5 for 30 seconds
+stress: info: [98528] dispatching hogs: 0 cpu, 5 io, 0 vm, 0 hdd
+stress: info: [98528] successful run completed in 30s
+
+ Performance counter stats for 'stress --io 5 --timeout 30':
+
+               121      page-faults                                                 
+           220,354      cache-misses                                                
+         6,644,951      dTLB-load-misses          #    0.09% of all dTLB cache hits 
+     7,158,527,311      dTLB-loads                                                  
+     4,736,048,357      dTLB-stores                                                 
+
+      30.003679863 seconds time elapsed
+
+       0.375911000 seconds user
+      89.415408000 seconds sys
 \end{lstlisting}
 \end{latin}
 آمار در ماشین مجازی دوم به صورت زیر است.
 \begin{latin}
 \begin{lstlisting}
 Running 3.sh
-Stress with --cpu 10 for 3 seconds
-stress: info: [78249] dispatching hogs: 10 cpu, 0 io, 0 vm, 0 hdd
-stress: info: [78249] successful run completed in 3s
+Stress with --cpu 10 for 30 seconds
+stress: info: [102060] dispatching hogs: 10 cpu, 0 io, 0 vm, 0 hdd
+stress: info: [102060] successful run completed in 30s
 
- Performance counter stats for 'stress --cpu 10 --timeout 3':
+ Performance counter stats for 'stress --cpu 10 --timeout 30':
 
-               199      page-faults                                                 
-           197,577      cache-misses                                                
-           488,929      dTLB-load-misses          #    0.00% of all dTLB cache hits 
-    18,797,521,847      dTLB-loads                                                  
-     8,907,024,866      dTLB-stores                                                 
+               198      page-faults                                                 
+           269,601      cache-misses                                                
+         4,585,463      dTLB-load-misses          #    0.00% of all dTLB cache hits 
+   192,855,683,281      dTLB-loads                                                  
+    91,378,916,932      dTLB-stores                                                 
 
-       3.005128718 seconds time elapsed
+      30.005242763 seconds time elapsed
 
-       8.975459000 seconds user
-       0.005321000 seconds sys
-
-
-Stress with --vm 4 and --vm-bytes 512M for 3 seconds
-stress: info: [78265] dispatching hogs: 0 cpu, 0 io, 4 vm, 0 hdd
-stress: info: [78265] successful run completed in 3s
-
- Performance counter stats for 'stress --vm 4 --vm-bytes 512M --timeout 3':
-
-         2,144,584      page-faults                                                 
-       110,294,661      cache-misses                                                
-        15,286,499      dTLB-load-misses          #    0.71% of all dTLB cache hits 
-     2,146,465,062      dTLB-loads                                                  
-     2,518,357,128      dTLB-stores                                                 
-
-       3.048368002 seconds time elapsed
-
-       1.407325000 seconds user
-       7.625520000 seconds sys
+      89.912802000 seconds user
+       0.013527000 seconds sys
 
 
-Stress with --io 5 for 3 seconds
-stress: info: [78273] dispatching hogs: 0 cpu, 5 io, 0 vm, 0 hdd
-stress: info: [78273] successful run completed in 3s
+Stress with --vm 4 and --vm-bytes 512M for 30 seconds
+stress: info: [102086] dispatching hogs: 0 cpu, 0 io, 4 vm, 0 hdd
+stress: info: [102086] successful run completed in 30s
 
- Performance counter stats for 'stress --io 5 --timeout 3':
+ Performance counter stats for 'stress --vm 4 --vm-bytes 512M --timeout 30':
 
-               119      page-faults                                                 
-            33,137      cache-misses                                                
-           658,411      dTLB-load-misses          #    0.09% of all dTLB cache hits 
-       743,359,108      dTLB-loads                                                  
-       492,419,915      dTLB-stores                                                 
+        20,368,281      page-faults                                                 
+     1,056,182,828      cache-misses                                                
+       142,087,000      dTLB-load-misses          #    0.70% of all dTLB cache hits 
+    20,241,966,596      dTLB-loads                                                  
+    23,747,197,367      dTLB-stores                                                 
 
-       3.002391862 seconds time elapsed
+      30.054767871 seconds time elapsed
 
-       0.046369000 seconds user
-       8.875937000 seconds sys
+      13.419151000 seconds user
+      76.236958000 seconds sys
+
+
+Stress with --io 5 for 30 seconds
+stress: info: [102104] dispatching hogs: 0 cpu, 5 io, 0 vm, 0 hdd
+stress: info: [102104] successful run completed in 30s
+
+ Performance counter stats for 'stress --io 5 --timeout 30':
+
+               127      page-faults                                                 
+           165,435      cache-misses                                                
+         6,651,791      dTLB-load-misses          #    0.09% of all dTLB cache hits 
+     7,818,658,472      dTLB-loads                                                  
+     5,223,902,416      dTLB-stores                                                 
+
+      30.002561657 seconds time elapsed
+
+       0.443775000 seconds user
+      89.341896000 seconds sys
 \end{lstlisting}
 \end{latin}
 
