@@ -103,10 +103,137 @@
 برابر شدن زمان می‌شود.
 
 \section{}
+در ابتدا ابزار 
+\lr{Open CAS}
+را نصب می‌کنیم.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/installing-open-cas.png}
+\end{figure}
+
+سپس ابزار 
+\lr{fio}
+را نصب می‌کنیم.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/installing-fio.png}
+\end{figure}
+
 \subsection{}
+همانطور که در شکل زیر مشاهده می‌شود، زمان اجرای دستور 
+153
+ثانیه است.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/3-a.png}
+\end{figure}
+
 \subsection{}
+همانطور که در شکل زیر مشاهده می‌شود، زمان اجرای دستور
+148
+ثانیه است.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/3-b.png}
+\end{figure}
+
 \subsection{}
+
+در شکل زیر دستگاه‌های ذخیره‌ سازی سیستم را مشاهده می‌کنیم.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/3-c-storage.png}
+\end{figure}
+
+در این قسمت به دلیل عدم در دسترس بودن 
+\lr{SSD}،
+از یک فلش به عنوان کش استفاده شده است.
+همانطور که در تصویر زیر مشاهده می‌کنید سرعت فلش بالاتر از 
+\lr{HDD}
+است و در آزمایش تاثیر منفی ندارد.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/3-c-speed.png}
+\end{figure}
+
+حال با دستور زیر عملیات خواسته شده را انجام می‌دهیم.
+
+\begin{latin}
+\begin{lstlisting}
+sudo casadm -S -d \
+    /dev/disk/by-id/usb-USB_SanDisk_3.2\
+    Gen1_01018cbcd5ec1843\
+    a6ea309fc0300fc871ab1\
+    edd6df237507244903575\
+    23c3fa267000000000000\
+    000000000f6a88cdaff82\
+    500083558107652cfe4c-0:0 -i 1 -c wt --force
+sudo casadm -A -d \
+    /dev/disk/by-id/ata-TOSHIBA\
+    _MQ04ABF100_28Q6PBRDT -i 1
+sudo casadm -L
+\end{lstlisting}
+\end{latin}
+
+اجرای دستورات بالا و خروجی دستور خواسته شده را در شکل زیر مشاهده می‌کنیم.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/3-c-result.png}
+\end{figure}
+
 \subsection{}
+\begin{itemize}
+    \item سیاست \lr{Write-Through}
+    در این سیاست، داده موقع نوشته شدن به صورت همزمان بر 
+    \lr{cache}
+    و
+    \lr{backend storage}
+    نوشته می‌شود. به همین دلیل خواندن در این حالت سریع‌تر است ولی نوشتن 
+    عملا کندتر است زیرا در دو جا نوشته می‌شود.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{images/3-d-wt.png}
+    \end{figure}
+    \item سیاست \lr{Write-Back}
+    در این سیاست، داده بر روی 
+    \lr{cache}
+    نوشته می‌شود و به اپلیکیشن گفته می‌شود که داده به صورت کامل نوشته شده.
+    در حالی که داده بعدها به صورت دوره‌ای بر روی 
+    \lr{backend storage}
+    نوشته می‌شود. طبیعتا این روش سرعت خواندن و نوشتن را افزایش می‌دهد.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{images/3-d-wb.png}
+    \end{figure}
+    \item سیاست \lr{Write-Around}
+    این سیاست مانند 
+    \lr{write through}
+    عمل می‌کند با این تفاوت که تنها داده موجود در کش را موقع نوشتن آپدیت می‌کند.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{images/3-d-wa.png}
+    \end{figure}
+\end{itemize}
+
+متاسفانه استفاده از فلش درایو به عنوان کش عملکرد خوبی ندارد. برای همین عملکرد 
+تمامی سیاست‌ها برای کش ناکارآمد تر از قسمت ب شدند. ولی با این حال می‌توان 
+سیاست‌های مختلف را با هم مقایسه کرد. 
+
+همانطور که مشاهده می‌شود دو سیاست 
+\lr{write back}
+و 
+\lr{write around}
+تفاوت چندانی ندارند ولی سیاست 
+\lr{write through}
+نسبت به دو سیاست دیگر بسیار کند تر عمل می‌کند.
+
 \subsection{}
 
 \end{document}
