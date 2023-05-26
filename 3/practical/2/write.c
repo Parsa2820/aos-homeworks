@@ -7,9 +7,11 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/stat.h>
+#include <sys/xattr.h>
 
-#define NUMBER_OF_FILES 1000
+#define NUMBER_OF_FILES 1000000
 #define USAGE printf("Usage: %s <NOBUFFERCACHE/BUFFERCACHE>\n", argv[0])
+#define METADATA_KEY "unique_identifier"
 
 char *get_random_name()
 {
@@ -54,17 +56,19 @@ int main(int argc, char *argv[])
 
     for (int i = 0; i < NUMBER_OF_FILES; i++)
     {
-        int flags = buffercache ? O_CREAT | O_TRUNC : O_DIRECT | O_CREAT | O_TRUNC;
-        int fd = open(get_random_name(), flags, S_IRUSR | S_IWUSR);
-        lseek(fd, 0, SEEK_SET);
-        int id = i;
-        write(fd, &id, sizeof(int));
+        int flags = buffercache ? O_WRONLY | O_APPEND | O_CREAT | O_TRUNC : O_WRONLY | O_APPEND | O_CREAT | O_TRUNC | O_DIRECT;
+        char *filename = get_random_name();
+        int fd = open(filename, flags, S_IRUSR | S_IWUSR);
+        char *unique_identifier = malloc(10);
+        sprintf(unique_identifier, "%d", i);
+        setxattr(filename, METADATA_KEY, unique_identifier, strlen(unique_identifier), 0);
         close(fd);
+        free(unique_identifier);
+        free(filename);
     }
 
     gettimeofday(&end, NULL);
-    double time_taken = end.tv_usec - start.tv_usec;
-    printf("Time taken: %f ms\n", time_taken);
+    printf("Time taken: %d s\n", end.tv_sec - start.tv_sec);
     
     return 0;
 }

@@ -7,7 +7,7 @@ echo "Running write without buffer cache"
 echo "Running read without buffer cache"
 ./read NOBUFFERCACHE
 
-rm -f *.txt
+find . -name "*.txt" -delete
 
 echo "Running write with buffer cache"
 ./write BUFFERCACHE
@@ -15,4 +15,4 @@ echo "Running write with buffer cache"
 echo "Running read with buffer cache"
 ./read BUFFERCACHE
 
-rm -f *.txt
+find . -name "*.txt" -delete

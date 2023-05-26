@@ -8,9 +8,11 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <dirent.h>
+#include <sys/xattr.h>
 
-#define NUMBER_OF_FILES 1000
+#define NUMBER_OF_FILES 1000000
 #define USAGE printf("Usage: %s <NOBUFFERCACHE/BUFFERCACHE>\n", argv[0])
+#define METADATA_KEY "unique_identifier"
 
 int main(int argc, char *argv[])
 {
@@ -63,8 +65,8 @@ int main(int argc, char *argv[])
     closedir(dir);
 
     struct timeval start, end;
+    char *buffer = malloc(10);
     gettimeofday(&start, NULL);
-    char *buf = malloc(128);
 
     for (int i = 0; i < NUMBER_OF_FILES; i++)
     {
@@ -76,13 +78,13 @@ int main(int argc, char *argv[])
             return 1;
         }
 
-        int bytes_read = read(fd, buf, 128);
+        fgetxattr(fd, METADATA_KEY, buffer, 10);
         close(fd);
     }
 
     gettimeofday(&end, NULL);
-    double time_taken = end.tv_usec - start.tv_usec;
-    printf("Time taken: %f ms\n", time_taken);
+    free(buffer);
+    printf("Time taken: %d s\n", end.tv_sec - start.tv_sec);
     
     return 0;
 }
